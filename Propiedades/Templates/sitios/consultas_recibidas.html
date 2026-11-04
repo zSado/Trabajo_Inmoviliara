@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container py-5">
+  <h2>Consultas Recibidas</h2>
+  <div class="list-group shadow-sm mt-4">
+    {% for c in consultas %}
+      <div class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Propiedad: {{ c.propiedad.titulo }}</h5>
+          <small class="text-muted">{{ c.fecha|date:"d M Y" }}</small>
+        </div>
+        <p class="mb-1">{{ c.mensaje }}</p>
+        <small class="text-muted">De: <strong>{{ c.interesado.username }}</strong> · Estado: {{ c.estado|capfirst }}</small>
+        
+        <div class="mt-2">
+          {% if c.estado == "nueva" %}
+            <form method="post" action="{% url 'responder_consulta' c.pk %}" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-success">Marcar como respondida</button>
+            </form>
+          {% endif %}
+          
+          {% if c.estado != "cerrada" %}
+            <form method="post" action="{% url 'cerrar_consulta' c.pk %}" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-secondary">Cerrar consulta</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p class="p-3">No has recibido consultas aún.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

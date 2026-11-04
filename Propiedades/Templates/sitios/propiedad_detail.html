@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container py-5">
+  <h2>{{ propiedad.titulo }}</h2>
+  <p class="text-muted">Publicado por: <strong>{{ propiedad.corredor.username }}</strong></p>
+  <div class="row">
+    <div class="col-md-8">
+      <p>{{ propiedad.descripcion }}</p>
+      <p><strong>Características:</strong> 
+        {% for c in propiedad.caracteristicas.all %}<span class="badge bg-secondary">{{ c.nombre }}</span>{% empty %}Sin características{% endfor %}
+      </p>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="text-success">${{ propiedad.precio }}</h3>
+          <p>{{ propiedad.metros_cuadrados }} m²</p>
+          <p>Estado: <strong>{{ propiedad.estado|capfirst }}</strong></p>
+          <p>Tipo: {{ propiedad.tipo.nombre|default:"Sin tipo" }}</p>
+          {% if user.is_authenticated and user != propiedad.corredor %}
+            <a href="{% url 'crear_consulta' propiedad.pk %}" class="btn btn-primary w-100 mt-3">Enviar consulta</a>
+          {% elif not user.is_authenticated %}
+            <a href="{% url 'login' %}" class="btn btn-outline-primary w-100 mt-3">Ingresa para consultar</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="{% url 'lista_propiedades' %}" class="d-inline-block mt-4">&larr; Volver al listado</a>
+</section>
+{% endblock %}

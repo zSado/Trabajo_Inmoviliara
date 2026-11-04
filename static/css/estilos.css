@@ -1,0 +1,73 @@
+/* Importar una fuente más elegante de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa; /* Un gris muy clarito para el fondo */
+    color: #333;
+}
+
+/* Imagen de fondo del inicio */
+.hero-inmobiliaria {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/static/img/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 70vh;
+    border-bottom: 5px solid #0d6efd; /* Línea decorativa abajo */
+}
+
+/* Tarjetas de propiedades */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efecto de que la tarjeta "flota" al pasar el mouse */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Botones personalizados (para que no sean el azul por defecto) */
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: scale(1.05);
+}
+
+.btn-outline-primary {
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Navbar más elegante */
+.navbar {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: #ffffff !important; /* Navbar blanca */
+}
+
+.navbar-dark .navbar-brand, 
+.navbar-dark .nav-link {
+    color: #333 !important;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #0d6efd !important; /* Marca en azul */
+}
+
+/* Footer */
+footer {
+    background-color: #212529;
+    color: #adb5bd;
+    font-size: 0.9rem;
+}

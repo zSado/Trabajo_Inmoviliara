@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Mi Cuenta{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <h2>Mi Cuenta</h2>
+  <div class="card shadow-sm p-4 mt-3">
+    <p><strong>Usuario:</strong> {{ user.username }}</p>
+    <p><strong>Correo:</strong> {{ user.email }}</p>
+    <p><strong>Propiedades publicadas:</strong> {{ total_propiedades }}</p>
+    <p><strong>Consultas enviadas:</strong> {{ total_consultas }}</p>
+    <div class="mt-3">
+      <a href="{% url 'editar_perfil' %}" class="btn btn-outline-primary">Editar Perfil</a>
+      <a href="{% url 'cambiar_password' %}" class="btn btn-outline-secondary">Cambiar Contraseña</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

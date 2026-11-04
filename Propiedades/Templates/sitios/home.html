@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Sección principal con la imagen de fondo llamada desde el CSS -->
+<header class="text-white text-center d-flex align-items-center hero-inmobiliaria">
+  <div class="container">
+    <h1 class="display-4 fw-bold">Encuentra tu próxima propiedad</h1>
+    <p class="lead mb-4">Las mejores casas, departamentos y terrenos de la mano de nuestros corredores.</p>
+    <a href="{% url 'lista_propiedades' %}" class="btn btn-primary btn-lg">Ver Propiedades</a>
+  </div>
+</header>
+
+<section class="container py-5">
+  <div class="row text-center mb-5">
+    <div class="col-md-4">
+      <h2 class="text-primary fw-bold">{{ disponibles }}</h2>
+      <p class="text-muted text-uppercase fw-semibold">Propiedades disponibles</p>
+    </div>
+    <div class="col-md-4">
+      <h2 class="text-primary fw-bold">{{ tipos }}</h2>
+      <p class="text-muted text-uppercase fw-semibold">Tipos de propiedad</p>
+    </div>
+    <div class="col-md-4">
+      <h2 class="text-primary fw-bold">{{ consultas }}</h2>
+      <p class="text-muted text-uppercase fw-semibold">Consultas recibidas</p>
+    </div>
+  </div>
+
+  <h3 class="mb-4 fw-bold">Últimas propiedades publicadas</h3>
+  <div class="row g-4">
+    {% for p in propiedades %}
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{ p.titulo }}</h5>
+            <h6 class="card-subtitle mb-2 text-success fw-bold">${{ p.precio }}</h6>
+            <p class="card-text text-muted">{{ p.metros_cuadrados }} m² · {{ p.tipo.nombre|default:"Sin tipo" }}</p>
+            <a href="{% url 'detalle_propiedad' p.pk %}" class="btn btn-outline-primary btn-sm w-100 mt-auto">Ver detalle</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12"><p>No hay propiedades publicadas aún.</p></div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container py-5">
+  <h2>Mis Consultas</h2>
+  <div class="list-group shadow-sm mt-4">
+    {% for c in consultas %}
+      <div class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Propiedad: {{ c.propiedad.titulo }}</h5>
+          <small class="text-muted">{{ c.fecha|date:"d M Y" }}</small>
+        </div>
+        <p class="mb-1">{{ c.mensaje }}</p>
+        <small class="text-muted">Estado: <span class="badge bg-info text-dark">{{ c.estado|capfirst }}</span></small>
+        {% if c.estado == "nueva" %}
+          <form method="post" action="{% url 'cancelar_consulta' c.pk %}" class="mt-2">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-outline-danger">Cancelar consulta</button>
+          </form>
+        {% endif %}
+      </div>
+    {% empty %}<p class="p-3">No has enviado consultas aún.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}

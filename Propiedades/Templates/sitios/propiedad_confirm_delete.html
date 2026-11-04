@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container py-5 text-center">
+  <h2>¿Estás seguro?</h2>
+  <p>Estás a punto de eliminar la propiedad <strong>"{{ propiedad.titulo }}"</strong>. Esta acción no se puede deshacer.</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'mis_propiedades' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</section>
+{% endblock %}

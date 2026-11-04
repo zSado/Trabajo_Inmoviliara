@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Enviar Consulta{% endblock %}
+{% block content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2>Consultar por: {{ propiedad.titulo }}</h2>
+      <p class="text-muted">Escribe tu mensaje y el corredor se pondrá en contacto contigo.</p>
+      
+      <form method="post" class="card shadow-sm p-4 mt-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="mt-3">
+          <button type="submit" class="btn btn-primary">Enviar Consulta</button>
+          <a href="{% url 'detalle_propiedad' propiedad.pk %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
